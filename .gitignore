@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.tmp/
+.vite-cache/
+.vitest-cache/
+*.tsbuildinfo
+*.zip

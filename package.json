@@ -1,0 +1,15 @@
+{
+  "name": "last-defense-corebreaker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check": "tsc -b --pretty false"
+  },
+  "dependencies": { "phaser": "^3.90.0" },
+  "devDependencies": { "typescript": "^5.9.3", "vite": "^7.2.2", "vitest": "^4.0.8" }
+}
