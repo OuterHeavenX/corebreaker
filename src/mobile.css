@@ -3,7 +3,7 @@ body{touch-action:auto}
 .screen{min-height:0}
 .screen.game{padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .game-layout{position:relative;display:block;min-height:0}
-.game-shell{width:100%;height:100%;max-width:420px;aspect-ratio:auto;margin:auto;touch-action:none;overflow:hidden}
+.game-shell{width:100%;height:calc(100% - 58px);max-width:420px;aspect-ratio:auto;margin:auto;touch-action:none;overflow:hidden}
 .game-shell canvas{touch-action:none}
 .side{display:none}
 button{min-height:44px;touch-action:manipulation}
@@ -11,4 +11,13 @@ button{min-height:44px;touch-action:manipulation}
 .toast{max-width:90vw;width:max-content}
 .play-controls{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:8px;right:8px;display:flex;justify-content:space-between;pointer-events:none;z-index:2}
 .play-controls button{pointer-events:auto;background:#112b40ee;padding:10px}
+button:disabled{opacity:.45;cursor:default}
+.play-controls{gap:5px;max-width:404px;margin:auto}
+.play-controls button{font-size:12px;flex:1;padding:10px 5px}
+.topbar .hud{flex-direction:column;gap:2px;text-align:right;font-size:12px}
+.toast{top:auto;bottom:22%;font-size:12px;max-width:85vw}
+.card{transition:border-color .15s,background .15s}
+.card:hover{border-color:#69dfff}
+.hero{position:relative}
+.hero:before{content:'';display:block;width:55px;height:55px;border:2px solid #51e4ff;border-radius:50%;margin:0 auto 25px;box-shadow:0 0 25px #51e4ff55,inset 0 0 25px #51e4ff33}
 @media(max-height:500px){.footer{display:none}.topbar{padding-top:4px}.hero{margin-top:12px}}
