@@ -30,11 +30,13 @@ Live game: https://outerheavenx.github.io/corebreaker/
 
 The fun pass. Destroyed targets and combo streaks drop **power capsules** — SPLIT, WIDE, GUNS, PIERCE and WALL. Every hit builds a **combo** that multiplies your **score** up to 5× and pays out a guaranteed capsule every eighth hit; best scores are kept per mode. The early game is faster (one-hit scouts, quicker core), health scales by region, and the arena modifiers are real: moving formations, steel bumpers, plasma lanes, portals, gravity wells and a blackout stage. The four bosses differ in health, armor, aim, lanes and movement, and Endless gets tougher every loop. Cores destroy enemy shots in flight, and a tap launches on touch screens.
 
+All visuals are procedural sprites drawn at start-up: glossy rainbow brick walls, a lit city under a nebula sky, additive glow, sparks, debris, lightning and big callouts. High-DPI screens render at 2× (toggle in Settings).
+
 Four elements and six combinations affect combat. Choose a second element instead of a stage upgrade. All 30 upgrade IDs are connected to their effects; ship-specific perks are filtered to compatible ships. Campaign bosses open a field depot with repairs, a run upgrade, a portable repair kit, and paid stock rerolls. Quick Defense ends after its boss.
 
 Original synthesized music and sound effects unlock on your first tap/click. Adjust Music and Effects independently in Settings (zero mutes that channel). Screen shake and reduced motion are respected by every new effect. Leaving a battle or reloading restarts that stage from its saved beginning. Pending upgrade/shop choices and purchases persist immediately.
 
-The simulation uses 120 Hz bounded fixed steps and swept expanded-box collisions. Effects are capped at 160 sparks, 33 projectiles, 24 blaster bolts, 24 pickups, five cores, and five lightning chain targets. Secondary hits cannot recursively trigger elements or fuel explosions.
+The simulation uses 120 Hz bounded fixed steps and swept expanded-box collisions. Effects are capped at 220 sparks, 70 debris chunks, 33 projectiles, 24 blaster bolts, 24 pickups, five cores, and five lightning chain targets. Secondary hits cannot recursively trigger elements or fuel explosions.
 
 Local development only: open Vite with `?qa=1` for stage loading, a fixed elemental/multiball build, controlled target damage, core loss, and a battle-state readout. These controls are removed from production bundles.
 

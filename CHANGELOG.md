@@ -4,6 +4,16 @@
 
 Fun pass: faster early game, power capsules, a real combo and score loop, arena modifiers that finally do something, and four distinct bosses.
 
+### Look and feel
+- **All art is now drawn sprites instead of flat rectangles.** Targets are glossy 3D bricks with bevels, highlights and embossed emblems; scout bricks take a rainbow colour from their row. The ship, enemy shots, scrap, rescue pods, power capsules and the boss hull all have their own art. Everything is generated in code at start-up, so there are still no image downloads.
+- **Denser walls.** Bricks are packed tighter and every stage gets two extra rows, so a stage opens on a 30-brick rainbow wall instead of 18 spaced blocks.
+- **High-resolution rendering** on high-DPI screens (2× canvas, sharp text and sprites), with a Settings toggle to turn it off.
+- **Backdrop:** per-region nebula, planet, lit city skyline and a parallax starfield that streaks faster as the combo climbs.
+- **Additive glow effects:** white-hot cores with coloured halos and comet trails, streak sparks, debris chunks, explosion blooms, shockwave rings, jagged lightning, plasma-lane beams, portal swirls, thruster flames.
+- **Big on-screen callouts** for stage start, boss warnings, combo milestones, FEVER (combo 12+), power pickups, reactor exposed/destroyed and sector clear, plus screen flashes and a red danger vignette at low shield.
+- **Audio:** noise-based explosion sounds, and the battle music adds hats and a doubled arpeggio while the combo is high.
+- Menus: animated starfield, gradient title, glowing buttons.
+
 ### New
 - **Power capsules** drop from destroyed targets (10% chance, guaranteed after 11 dry kills) and from every eighth hit of an unbroken combo: SPLIT (every core splits, up to five), WIDE (+40% paddle, 12s), GUNS (twin auto-blasters, 7s), PIERCE (cores hit 50% harder and punch through kills, 6s) and WALL (floor barrier, 9s).
 - **Score and records.** Hits, kills, rescues, intercepted shots and a shield bonus at stage clear all score; the combo multiplies score up to 5×. Best score per mode is saved, shown on the title screen, mode select and a new results screen with a "run it back" button.

@@ -1,7 +1,7 @@
 import type { Progress, RunState, Settings } from './types';
 import { UPGRADES } from './data';
 const KEY = 'corebreaker.save.v2', BACKUP = 'corebreaker.save.backup';
-export const defaults: Settings = { music: .55, sfx: .7, shake: .35, reducedMotion: false, highContrast: false, largeCore: false, touchSensitivity: 1, directTouch: false, leftHanded: false, assistSpeed: false, assistWidth: false, assistBullets: false };
+export const defaults: Settings = { music: .55, sfx: .7, shake: .35, reducedMotion: false, highContrast: false, largeCore: false, touchSensitivity: 1, directTouch: false, leftHanded: false, assistSpeed: false, assistWidth: false, assistBullets: false, crisp: true };
 export const fresh = (): Progress => ({ version: 2, xp: 0, rank: 1, rescues: 0, campaignBest: 0, unlocks: ['guardian'], tutorials: [], settings: { ...defaults }, records: {}, selectedShip: 'guardian' });
 export function validate(x: unknown): x is Progress { if (!x || typeof x !== 'object')
     return false; const p = x as any; const finite = (n: unknown) => typeof n === 'number' && Number.isFinite(n) && n >= 0; if (![1, 2].includes(p.version) || !finite(p.xp) || !finite(p.rank) || !Array.isArray(p.unlocks))

@@ -45,6 +45,7 @@ export interface Settings {
     assistSpeed: boolean;
     assistWidth: boolean;
     assistBullets: boolean;
+    crisp?: boolean;
 }
 export interface Progress {
     version: 2;
