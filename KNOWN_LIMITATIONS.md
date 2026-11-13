@@ -1,11 +1,10 @@
-# Known limitations — 0.2.0
+# Known limitations — 0.3.0
 
-- The requested combat/upgrade/Siege Carrier/shop/audio pass is implemented. The larger original campaign brief remains unfinished.
-- Later boss operations currently reuse the new carrier component encounter; bespoke Furnace Engine, Coil Serpent and Citadel Prime choreography remains future work.
-- Several named arena modifiers still do not alter physics. Reflector and command-enemy behaviors remain basic.
-- Endless does not yet have a complete scaling curve, and gamepad menu navigation is incomplete.
-- A seeded automated paddle bot clears stages 1–5; this does not establish human difficulty or pacing. The bot used a fixed two-element build and two damage ranks.
-- Browser viewport checks are desktop emulation. No agent-operated physical iPhone or Steam Deck tests or hardware FPS measurements were performed. The user reported the previous 0.1.0 build worked on iPhone.
-- Audio synthesis initializes without browser errors, but device-speaker listening and interruption behavior need physical iPhone testing.
-- Saves are local to the current browser. Mid-stage reload intentionally restores the saved stage beginning.
-- Phaser produces a large vendor chunk (~1.21 MB uncompressed); the total compressed JavaScript payload is about 351 KB.
+- **Balance is tuned by simulation, not by people.** A paddle bot that never dodges and takes the first upgrade offered clears stages 1–9 and usually falls at the second or third boss. Human pacing, boss difficulty and the power-capsule drop rate need real playtesting.
+- Bosses share the carrier hull artwork and two-phase structure; they differ in health, armor plates, aimed fire, plasma lanes and movement, not in bespoke choreography.
+- Reflector and command targets exist in data but are not used by any authored layout.
+- Gamepad menu navigation is still incomplete (in-battle stick, A and B work).
+- No physical iPhone, Android or Steam Deck testing or hardware FPS measurement was done for this version. Browser checks used headless desktop Chrome at a 390×844 touch viewport.
+- Audio was checked for errors only; nobody has listened to the new cues on device speakers.
+- Saves and score records are local to the current browser. Mid-stage reload intentionally restores the saved stage beginning. The daily challenge shares a seed by local date but has no online leaderboard.
+- Phaser produces a large vendor chunk (~1.2 MB uncompressed).

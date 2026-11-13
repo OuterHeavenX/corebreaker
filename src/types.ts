@@ -2,6 +2,7 @@ export type ShipId = 'guardian' | 'striker' | 'magnetar';
 export type Element = 'fire' | 'ice' | 'lightning' | 'kinetic';
 export type EnemyType = 'scout' | 'armored' | 'shield' | 'repair' | 'gunship' | 'mine' | 'interceptor' | 'reflector' | 'conductive' | 'fuel' | 'prison' | 'command';
 export type Rarity = 'COMMON' | 'RARE' | 'EPIC';
+export type PowerId = 'split' | 'wide' | 'blaster' | 'overcharge' | 'barrier';
 export interface ShipDef {
     id: ShipId;
     name: string;
@@ -74,4 +75,5 @@ export interface RunState {
     shopRerolls?: number;
     consumable?: boolean;
     rescued?: number;
+    score?: number;
 }

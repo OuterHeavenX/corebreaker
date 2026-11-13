@@ -1,5 +1,5 @@
 import type { Settings } from './types';
-type Cue = 'paddle' | 'hit' | 'armor' | 'fire' | 'ice' | 'lightning' | 'rescue' | 'scrap' | 'damage' | 'ability' | 'phase' | 'victory' | 'defeat' | 'launch';
+type Cue = 'paddle' | 'hit' | 'armor' | 'fire' | 'ice' | 'lightning' | 'rescue' | 'scrap' | 'damage' | 'ability' | 'phase' | 'victory' | 'defeat' | 'launch' | 'power' | 'combo' | 'clang' | 'bolt' | 'portal' | 'wall';
 /** Original, bounded Web Audio score. No downloads; starts only after a gesture. */
 class Soundtrack {
     private ctx?: AudioContext;
@@ -36,16 +36,16 @@ class Soundtrack {
     private tone(hz: number, duration: number, volume: number, bus: GainNode, type: OscillatorType = 'sine', delay = 0, endHz?: number) { const c = this.ctx; if (!c || c.state !== 'running' || this.voices >= 24)
         return; this.voices++; const o = c.createOscillator(), g = c.createGain(), t = c.currentTime + delay; o.type = type; o.frequency.setValueAtTime(hz, t); if (endHz)
         o.frequency.exponentialRampToValueAtTime(endHz, t + duration); g.gain.setValueAtTime(.001, t); g.gain.exponentialRampToValueAtTime(Math.max(.001, volume), t + .008); g.gain.exponentialRampToValueAtTime(.001, t + duration); o.connect(g); g.connect(bus); o.start(t); o.stop(t + duration + .02); o.onended = () => { o.disconnect(); g.disconnect(); this.voices--; }; }
-    cue(name: Cue) {
+    cue(name: Cue, pitch = 1) {
         const c = this.ctx, b = this.effects;
         if (!c || !b || document.hidden)
             return;
         const now = c.currentTime;
-        if (['hit', 'armor', 'paddle'].includes(name) && now - this.last < .025)
+        if (['hit', 'armor', 'paddle', 'bolt', 'clang'].includes(name) && now - this.last < (name === 'bolt' ? .09 : .025))
             return;
         this.last = now;
-        const notes: Record<Cue, number[]> = { paddle: [360], hit: [210], armor: [110], fire: [160, 240], ice: [950, 1400], lightning: [680, 1300], rescue: [523, 659, 784], scrap: [880, 1174], damage: [120, 70], ability: [220, 440, 880], phase: [110, 165, 220], victory: [523, 659, 784, 1046], defeat: [220, 196, 147], launch: [220, 660] };
-        notes[name].forEach((f, i) => this.tone(f, name === 'victory' ? .35 : .16, .45, b, ['armor', 'damage'].includes(name) ? 'sawtooth' : 'triangle', i * .065, name === 'hit' ? 65 : undefined));
+        const notes: Record<Cue, number[]> = { paddle: [360], hit: [210], armor: [110], fire: [160, 240], ice: [950, 1400], lightning: [680, 1300], rescue: [523, 659, 784], scrap: [880, 1174], damage: [120, 70], ability: [220, 440, 880], phase: [110, 165, 220], victory: [523, 659, 784, 1046], defeat: [220, 196, 147], launch: [220, 660], power: [392, 523, 784, 1046], combo: [659, 880, 1318], clang: [1250, 830], bolt: [990], portal: [300, 900], wall: [180, 360] };
+        notes[name].forEach((f, i) => this.tone(f * pitch, name === 'victory' ? .35 : name === 'bolt' ? .06 : .16, name === 'bolt' ? .14 : .45, b, ['armor', 'damage'].includes(name) ? 'sawtooth' : 'triangle', i * .065, name === 'hit' ? 65 : undefined));
     }
     private tick() { if (!this.ctx || this.ctx.state !== 'running' || !this.music || document.hidden || this.mode === 'silent')
         return; this.apply(); const s = this.step++, boss = this.mode === 'boss', menu = this.mode === 'menu', roots = [130.81, 103.83, 155.56, 116.54], root = roots[(Math.floor(s / 32) + this.region) % 4]; if (s % 8 === 0)

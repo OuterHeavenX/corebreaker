@@ -5,6 +5,7 @@ export const defaults: Settings = { music: .55, sfx: .7, shake: .35, reducedMoti
 export const fresh = (): Progress => ({ version: 2, xp: 0, rank: 1, rescues: 0, campaignBest: 0, unlocks: ['guardian'], tutorials: [], settings: { ...defaults }, records: {}, selectedShip: 'guardian' });
 export function validate(x: unknown): x is Progress { if (!x || typeof x !== 'object')
     return false; const p = x as any; const finite = (n: unknown) => typeof n === 'number' && Number.isFinite(n) && n >= 0; if (![1, 2].includes(p.version) || !finite(p.xp) || !finite(p.rank) || !Array.isArray(p.unlocks))
+    return false; if (p.records !== undefined && (!p.records || typeof p.records !== 'object' || Object.values(p.records).some(n => !finite(n))))
     return false; if (p.settings) {
     for (const [key, value] of Object.entries(p.settings)) {
         const d = (defaults as any)[key];
@@ -20,6 +21,8 @@ export function validate(x: unknown): x is Progress { if (!x || typeof x !== 'ob
         if (!u || !Number.isInteger(n) || (n as number) < 0 || (n as number) > u.maxRank)
             return false;
     }
+    if (r.score !== undefined && !finite(r.score))
+        return false;
     if (r.phase && !['battle', 'upgrade', 'shop'].includes(r.phase))
         return false;
     if (r.offers && (!Array.isArray(r.offers) || r.offers.some((id: string) => !UPGRADES.some(u => u.id === id))))

@@ -1,29 +1,33 @@
-# Verification — Reactor Rising 0.2.0
+# Verification — Overcharge 0.3.0
 
-## Automated (Windows / Node / Vitest)
+## Automated
 
-39 checks pass across four files. Production TypeScript/Vite build passes.
+61 checks pass across four files (39 carried over from 0.2.0, 22 new). TypeScript type-checks cleanly against the Phaser 3.90.0 type definitions.
 
-Coverage includes swept high-speed collisions, successive contacts, rebound rules, all six synergy prerequisites/cooldowns, freeze resistance, upgrade compatibility and rank limits, shop prices/caps/duplicate prevention, corrupt-save backup recovery, migration, pending offers, shop stock, multiball, Aegis expiration, invulnerability, fuel non-recursion, collection windows and boss phase/defeat transitions.
+How this was run: the agent's environment could not install npm packages, so the test files were bundled with esbuild and executed with a small `vitest`-compatible shim, and the type-check used TypeScript 6.0 with Phaser's published `types/phaser.d.ts`. The project's own `npm test` (Vitest) and `npm run build` (tsc + Vite) run in the GitHub Actions deploy workflow and gate deployment.
 
-The battle suite calls the actual simulation with rendering stubbed. A seeded paddle bot (Guardian, Fire + Lightning, damage rank 2, capacitor rank 1) cleared each stage independently with no forced kills or health resets:
+New coverage: region and endless health scaling, combo and pity power drops, each power capsule's effect, deferred split while holding, energy wall bounce, overcharge pass-through versus rebound, blaster bolts and steel bumpers, moving-target overlap resolution, portals, plasma-lane damage, gravity-well speed conservation, per-boss health and parts, score/combo multiplier persistence, combo break on core loss, shot interception, and the vertical-rally re-aim.
 
-| Stage | Simulated seconds | Shield remaining |
+The battle suite calls the real simulation with rendering stubbed. The original seeded paddle bot (Guardian, Fire + Lightning, damage rank 2, capacitor rank 1) still clears stages 1–5 from a fresh state:
+
+| Stage | Simulated seconds (0.2.0 → 0.3.0) | Shield remaining (0.2.0 → 0.3.0) |
 |---|---:|---:|
-| 1 | 54.6 | 100 |
-| 2 | 55.0 | 100 |
-| 3 | 61.6 | 82 |
-| 4 | 53.2 | 100 |
-| 5 | 76.7 | 4 |
+| 1 | 54.6 → 42.6 | 100 → 100 |
+| 2 | 55.0 → 43.2 | 100 → 100 |
+| 3 | 61.6 → 41.7 | 82 → 88 |
+| 4 | 53.2 → 28.2 | 100 → 100 |
+| 5 | 76.7 → 58.7 | 4 → 40 |
 
-These are simulation observations, not human pacing measurements or rendered FPS benchmarks.
+A simpler bot also runs one simulated minute on stages 6, 9, 10, 11, 13, 16 and 20 to exercise every arena modifier and boss variant, asserting finite core state throughout.
 
-## Interactive desktop browser / viewport emulation
+A separate carry-over simulation (not part of the suite) chained whole campaign runs on three seeds with a bot that never dodges and takes the first upgrade offered: it cleared stages 1–9 on every seed and died at stage 10 or 15. These are simulation observations, not human pacing measurements.
 
-Verified title → campaign → ship → element → arena, launch, pause, visible multiball, upgrade selection, continuation from a pending upgrade, boss-clear → shop, kit and upgrade purchases, persisted stock and currency after reload, and deployment into stage 6. Dev-only target-damage controls exercised transitions; they are not evidence of manual boss completion.
+## Browser (headless Chrome, WebGL via SwiftShader, 390×844)
 
-Screens inspected at desktop 1280×720 and portrait 390×844 / 320×568. On the 320×568 viewport all four controls measured 72.25×44 CSS pixels and fit inside the viewport. No console errors were captured during these checks.
+A bundle built from this source with Phaser 3.90.0 was driven by a scripted bot on all 20 stages plus an endless-loop stage (25), with every power capsule active: no page errors or console errors. A touch-emulated pass covered title → how to play → quick defense → ship → element → tap-to-launch → stage clear → upgrade choice → stage 2 with score carried → forced defeat → results with new record → record shown on the title screen. Screenshots were inspected for HUD overlap, toast placement and modifier visuals.
+
+Frame rate in software-rendered headless Chrome was 32–39 fps, which says nothing about real devices.
 
 ## Hardware
 
-Real iPhone: not tested by the agent. Real Steam Deck: not tested. Speaker listening, touch feel and hardware performance require device playtesting.
+Real iPhone, Android and Steam Deck: not tested. Speaker listening, touch feel and hardware performance require device playtesting.
