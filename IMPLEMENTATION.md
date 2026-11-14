@@ -10,11 +10,14 @@
 - [x] Campaign, Quick Defense, Daily Challenge, Endless unlock routing
 - [x] Versioned local save, backup, validation, migration, JSON export/import
 - [x] Accessibility settings, responsive UI, PWA packaging
-- [ ] Deep boss-specific phase choreography and fully differentiated arena modifier physics
+- [x] Arena modifier physics: moving formations, steel bumpers, plasma lanes, portals, gravity wells, blackout
+- [x] Four differentiated bosses (health, plates, aimed fire, lanes, movement) and endless loop scaling
+- [x] Power capsules, combo payouts, score, per-mode records and results screen
+- [ ] Bespoke boss choreography and hull artwork per boss
 - [x] Original synthesized music and effects with independent volume controls
 - [x] Two-phase Siege Carrier, multiball, campaign shops, consumables and persisted purchases
-- [x] 39 automated checks and desktop browser checks including phone-sized viewports
+- [x] 61 automated checks and headless browser checks at a phone-sized touch viewport
 - [ ] Full gamepad menu focus
 - [ ] Browser automation suite and real-device tuning
 
-Next concrete task: expand boss state machines and implement portal/gravity/barrier arena physics, then tune with recorded browser runs.
+Next concrete task: human playtest for pacing and boss difficulty, then bespoke boss choreography and gamepad menu focus.
